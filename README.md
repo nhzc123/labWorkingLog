@@ -1,7 +1,18 @@
-labWorkingLog
+lab working log
 =====
-###2016.01.07
-	1. from original file to session file
-	getSession.java
-	2. find bitrateTypes <br>
-	bitrateTypes.java video_session
+***
+
+##2016.01.07
+###from original file to session file
+
+* getSession.java
+
+###find bitrate_type
+
+* bitrate_types.java
+* video_session (the original video content)
+
+***
+
+
+	
