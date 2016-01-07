@@ -1,7 +1,5 @@
 lab working log
 =====
-***
-
 ##2016.01.07
 ###from original file to session file
 
@@ -11,7 +9,6 @@ lab working log
 
 * bitrate_types.java
 * video_session (the original video content)
-
 ***
 
 
