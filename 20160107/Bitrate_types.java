@@ -12,11 +12,11 @@ public class Bitrate_types {
 	static HashMap<String, String> client_device = new HashMap<String, String>();
 
 	public static void main(String[] args) {
-		String root_dir = "/mnt/2t/Bestv_cdn/";
+		String root_dir = "/mnt/1t/backup/2013Data/";
 		File log_format = new File(root_dir + "session_format");
 		File[] server_logs = log_format.listFiles();
 		sort(server_logs);
-		
+
 		String s="";
 		String key_back = "";
 		int size_back = 0;
@@ -42,7 +42,8 @@ public class Bitrate_types {
 					}
 				}
 				in.close();
-				
+
+				/*
 				is = new FileInputStream(root_dir + "info/session_video_fix");
 				in  = new BufferedReader(new InputStreamReader(is, "utf-8"));
 				while ((s=in.readLine())!=null){
@@ -54,7 +55,7 @@ public class Bitrate_types {
 					video_info.put(ss[0], values);
 				}
 				in.close();
-				
+				*/
 				is = new FileInputStream(root_dir + "client_device");
 				in  = new BufferedReader(new InputStreamReader(is, "utf-8"));
 				while ((s=in.readLine())!=null){
@@ -63,7 +64,7 @@ public class Bitrate_types {
 				}
 				in.close();
 			}
-			
+
 			String type = "";
 			int num = 0;
 			int bitrate_back = 0;
@@ -79,7 +80,7 @@ public class Bitrate_types {
 			for (int i=0; i<server_logs.length; i++) {
 			//for (int i=0; i<1; i++) {
 				System.out.println(server_logs[i].getName());
-				
+
 				FileInputStream is = new FileInputStream(server_logs[i]);
 				BufferedReader in  = new BufferedReader(new InputStreamReader(is, "utf-8"));
 				while ((s=in.readLine())!=null) {
@@ -144,7 +145,7 @@ public class Bitrate_types {
 						timestamp = ss[7];
 					} else {
 						if (chunks.size()!=0) {
-							//cout session summary 
+							//cout session summary
 							String ss_back[] = key_back.split("\t");
 							if (video_info.containsKey(ss_back[5])) {
 								if (type.equals("")) {
@@ -202,14 +203,14 @@ public class Bitrate_types {
 			}
 		}
 	}
-	
+
 	static String get_device(String client) {
 		if (client_device.containsKey(client)) {
 			return client_device.get(client);
 		}
 		return "other";
 	}
-	
+
 	static Pattern pat1 = Pattern.compile("mp4\\.(\\d+)\\.to\\.ts");
 	static Pattern pat2 = Pattern.compile("(\\d+)\\.ts");
 	static Pattern pat3 = Pattern.compile("_(.*?)\\.");
