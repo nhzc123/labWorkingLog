@@ -37,9 +37,10 @@ public class Get_session {
 		try{
 			int begin = Integer.parseInt(args[0]);
 			int end = Integer.parseInt(args[1]);
-			
-			String root_dir = "/mnt/2t/Bestv_cdn/";
+
+			String root_dir = "/mnt/1t/backup/2013Data/";
 			//read device_id file
+			/*
 			{
 				FileInputStream is = new FileInputStream(root_dir + "device/total_server");
 				InputStreamReader ir = new InputStreamReader(is, "utf-8");
@@ -53,6 +54,7 @@ public class Get_session {
 				ir.close();
 				is.close();
 			}
+			*/
 			s_bitrate.clear();
 			st_bitrate.clear();
 			st_bitrate.put("S1", 207);
@@ -60,7 +62,7 @@ public class Get_session {
 			st_bitrate.put("S3", 582);
 			st_bitrate.put("S4", 932);
 			st_bitrate.put("S5", 32);
-			
+
 			File log_dir = new File(root_dir + "10.49.8.11/");
 			File[] files = log_dir.listFiles();	//cdn_servers
 			sort(files);
@@ -93,7 +95,7 @@ public class Get_session {
 						sort(dir3);
 						for (int p=0; p<dir3.length; p++) {
 							long day = sdf2.parse(dir1[j].getName() + dir2[k].getName() + dir3[p].getName() + " 000000").getTime();
-							
+
 							//write session
 							it = Sessions.entrySet().iterator();
 							while (it.hasNext()) {
@@ -120,7 +122,7 @@ public class Get_session {
 										if ((now-latest > 3600000) && s.contains("userid=")) {
 											write_session(out, rf, rf_format, sdf2.parse("20140101 000000").getTime());
 										}*/
-										
+
 										Sessions.get(key).add(s);
 									} else {
 										if (s.contains("/000/index.m3u8") || s.contains("userId")) {
@@ -160,7 +162,7 @@ public class Get_session {
 			e.printStackTrace();
 		}
 	}
-	
+
 	static void sort(File[] files) {
 		for (int i=0; i<files.length; i++) {
 			for (int j=0; j<files.length; j++) {
@@ -172,12 +174,12 @@ public class Get_session {
 			}
 		}
 	}
-	
+
 	static long get_time(String log) throws ParseException {
 		String ss[] = log.split(" ");
 		return sdf.parse(ss[4] + " " + ss[5]).getTime();
 	}
-	
+
 	static String get_key(String log) {
 		String ss[] = log.split("\"");
 		if (ss.length==8 || ss.length==9 || ss.length==10 || ss.length==12) {
@@ -193,7 +195,7 @@ public class Get_session {
 		}
 		return null;
 	}
-	
+
 	//get userid through pat_userid
 	static String get_userid(String log) {
 		Matcher mat = pat_userid.matcher(log);
@@ -206,12 +208,12 @@ public class Get_session {
 		}
 		return "000000000000000";
 	}
-	
+
 	//write session
 	static void write_session(BufferedWriter out, RandomAccessFile rf, RandomAccessFile rf_format, long day) throws Exception {
 		Map.Entry<String, ArrayList<String>> entry = it.next();
 		ArrayList<String> t_list = entry.getValue();
-		
+
 		chunks.clear();
 		long time_s = get_time(t_list.get(0));
 		long time_e = get_time(t_list.get(t_list.size()-1));
@@ -259,7 +261,7 @@ public class Get_session {
 					System.out.println("-------" + line);
 					continue;
 				}
-				
+
 				Matcher mat = pat_disk.matcher(ss1[1]);
 				if (mat.find()) {
 					diskid = mat.group(1);
@@ -267,13 +269,13 @@ public class Get_session {
 					diskid = "-1";
 					System.out.println("Disk error!!!");
 				}
-				
+
 				String ss11[] = ss1[1].split("/");//	/11/345/281/000/1/S4/1.ts
 				String ss2[] = ss[2].split(" ");  //	 206 625147
 				String t_bitrate = ss11[ss11.length-2];
 				t_time += Double.parseDouble(ss0[0]);
 				t_size += Integer.parseInt(ss2[2]);
-				
+
 				long timestamp = sdf.parse(ss0[4] + " " + ss0[5]).getTime()/1000;
 				int bitrate = 0;
 				if (ss1[1].contains("m3u8")) {
@@ -345,7 +347,7 @@ public class Get_session {
 				} else {
 					out_bitrate = String.valueOf(bitrate);
 				}
-				
+
 				//userid key(ip videoid device) video_code diskid time timestamp Bitrate filename ret size
 				rf_format.writeBytes(userid + "\t" + entry.getKey() + "\t" + video_code + "\t" + diskid + '\t' + ss0[0] + "\t" + timestamp + "\t" + out_bitrate + "\t" + ss11[ss11.length-1] + "\t" + ss2[1] + "\t" + ss2[2] + "\t" + client + "\n");
 				rf.writeBytes(line + "\n");
@@ -354,7 +356,7 @@ public class Get_session {
 			long endinfile_f = rf_format.getFilePointer();
 			s_num = lognum - m3u8_num;
 			speed = t_size/t_time;
-			
+
 			//server userid key(ip videoid device) video_code starttime endtime startline endline startinfile endinfile startinfile_f endinfor_f lognum s_num s1 s2 s3 s4 s5 m3u8_num t_time t_size speed switch_num
 			out.write(cdn_server + "\t" + userid + "\t" + entry.getKey() + "\t" + video_code + "\t" + sdf2.format(new Date(time_s)) + "\t" + sdf2.format(new Date(time_e))
 					 + "\t" + startline + "\t" + endline + "\t" + startinfile + "\t" + endinfile + "\t" + startinfile_f + "\t" + endinfile_f + "\t" + lognum + "\t" + s_num
