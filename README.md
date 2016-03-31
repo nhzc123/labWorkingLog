@@ -18,3 +18,10 @@ lab working log
 * spider.py
 
 ***
+
+##2016.03.31
+###add start delay into Get_session.java 
+
+* getSession.java
+
+***
