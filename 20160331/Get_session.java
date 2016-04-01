@@ -81,8 +81,8 @@ public class Get_session {
 				System.out.println(i + "\t" + cdn_server + ":\t" + sdf.format(new Date()));
 				startline = 0;
 				endline = 0;
-				RandomAccessFile rf = new RandomAccessFile(root_dir + "rubbish/session_origin/" + cdn_server, "rw");	//session
-				RandomAccessFile rf_format = new RandomAccessFile(root_dir + "rubbish/session_format/" + cdn_server, "rw");	//format session
+				RandomAccessFile rf = new RandomAccessFile(root_dir + "session_origin/" + cdn_server, "rw");	//session
+				RandomAccessFile rf_format = new RandomAccessFile(root_dir + "session_format/" + cdn_server, "rw");	//format session
 				//userid key(ip videoid device) video_code diskid time timestamp  Bitrate filename ret size
 				//rf_format.writeBytes("userid\tip\tvideo\tdevice\tvideo_code\tdiskid\ttime\ttimestamp\tBitrate\tfilename\tret\tsize\n");
 				File[] dir1 = files[i].listFiles();	//years
