@@ -37,25 +37,16 @@ subplot(2,2,2);
 plot(startDelayPhonePoint{1,1}, startDelayPhonePoint{1,2},'*g');
 xlabel('start delay(second)','fontsize',ftsz);
 ylabel('Fraction of views(%)', 'fontsize', ftsz);
-hleg = legend('Phone', 'Location','NorthEast');
+hleg = legend('Phone', 'Location','NorthWes');
 set(hleg,'FontSize',15);
-grid on;
+
 hold on;
 subplot(2,2,3);
 [startDelayPadPoint] = textscan(fopen('/Users/user/Downloads/graduateData/0407/startDelayPadPoint'), '%f%f','delimiter','\t');
 plot(startDelayPadPoint{1,1}, startDelayPadPoint{1,2},'dr');
-xlabel('start delay(second)','fontsize',ftsz);
-ylabel('Fraction of views(%)', 'fontsize', ftsz);
-hleg = legend('Pad', 'Location','NorthEast');
-set(hleg,'FontSize',15);
-grid on;
 hold on;
 subplot(2,2,4);
 [startDelayOttPoint] = textscan(fopen('/Users/user/Downloads/graduateData/0407/startDelayOttPoint'), '%f%f','delimiter','\t');
 plot(startDelayOttPoint{1,1}, startDelayOttPoint{1,2},'sb');
-xlabel('start delay(second)','fontsize',ftsz);
-ylabel('Fraction of views(%)', 'fontsize', ftsz);
-hleg = legend('Ott Stb', 'Location','NorthEast');
-set(hleg,'FontSize',15);
-grid on;
+
 
