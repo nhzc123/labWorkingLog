@@ -4,7 +4,8 @@
 % para@4 : arr_Vals, array of the values to be processed.
 
 function [x, CDF_Vals] = funcCDF(CNT_pnts, Range_low, Range_up, arr_Vals)
-data = sort( arr_Vals' ); % T', horizon arrays of T.
+%data = sort( arr_Vals' ); % T', horizon arrays of T.
+data = arr_Vals';
 N = length(data);
 stepLen = (Range_up-Range_low)/CNT_pnts;
 Counter = zeros(1,CNT_pnts);
