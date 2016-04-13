@@ -29,7 +29,7 @@ if __name__ == "__main__":
             if videoLength == 0:
                 videoRate = 0
             else:
-                videoRate = float(l[15]) / videoLength
+                videoRate = float(l[15])*10 / videoLength
             outputFile.write(line.strip() + "\t" + videoContent[l[5]][0] + "\t" + videoContent[l[5]][1] + "\t" + videoContent[l[5]][2] + "\t" + str(videoRate) + "\n")
         else:
             print(line)
