@@ -1,4 +1,4 @@
-function [fitresult, gof] = createFit(xAxis, yAxis)
+function [fitresult, gof,xData,yData] = createFit(xAxis, yAxis)
 %CREATEFIT(XAXIS,YAXIS)
 %  Create a fit.
 %
@@ -27,12 +27,15 @@ opts.StartPoint = [0.743132468124916 0.392227019534168];
 [fitresult, gof] = fit( xData, yData, ft, opts );
 
 % Plot fit with data.
-figure( 'Name', 'untitled fit 1' );
-h = plot( fitresult, xData, yData );
-legend( h, 'yAxis vs. xAxis', 'untitled fit 1', 'Location', 'NorthEast' );
+%figure( 'Name', 'untitled fit 1' );
+%h = plot( fitresult);
+%hold on;
+%plot( xData, yData);
+
+%legend('weibull fit line', 'movie', 'Location', 'NorthWest' );
 % Label axes
-xlabel( 'xAxis' );
-ylabel( 'yAxis' );
+%xlabel( 'viewing time(s)' );
+%ylabel( 'cumulative distribution function' );
 grid on
 
 
